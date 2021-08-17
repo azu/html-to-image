@@ -144,6 +144,17 @@ describe('html to image', () => {
         .catch(done)
     })
 
+    it('should render link nodes', (done) => {
+      Helper.bootstrap('link/node.html', 'link/style.css')
+        .then(() => {
+          // Direct to capture anchor node
+          return document.getElementById('dom-node > a') as HTMLDivElement // FIXME: Helper.assertTextRendered require Div
+        })
+        .then(Helper.assertTextRendered(['LINK TEXT']))
+        .then(done)
+        .catch(done)
+    })
+
     it('should preserve content of ::before and ::after pseudo elements', (done) => {
       Helper.bootstrap('pseudo/node.html', 'pseudo/style.css')
         .then(
